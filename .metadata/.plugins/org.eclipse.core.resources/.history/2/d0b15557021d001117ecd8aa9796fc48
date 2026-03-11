@@ -1,0 +1,23 @@
+package basics;
+
+import java.util.Date;
+import java.util.List;
+
+public class Car {
+	String model; //enum
+	String color;
+	float price;
+	Engine engine;  //Has-A
+	String fuleType;
+	String number;
+	boolean insured;
+	String transmission;
+	int seats;
+	float weight;
+	String design;  //Coupe, sedan, XUV
+	float mileage;
+	String brand;
+	boolean ev;
+	Date manfacturingDate;
+	List<Wheel> wheels;
+}

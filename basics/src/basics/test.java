@@ -1,0 +1,23 @@
+package basics;
+
+public class test {
+       int x=10;
+       float interest=13.1F;
+       void display() {
+    	   System.out.println(x);
+       }
+	public static void main(String[] args) {
+         test obj=new test();
+         obj.display();
+         whileLoop(); 
+	}
+	private static void whileLoop() {
+		int i=1;
+		while(i>=5) {
+			System.out.println(i);
+			i++;
+		}
+		
+	}
+
+}

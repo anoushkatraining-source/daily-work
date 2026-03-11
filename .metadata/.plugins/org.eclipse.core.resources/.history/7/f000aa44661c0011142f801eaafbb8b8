@@ -1,0 +1,19 @@
+package basics;
+import java.util.ArrayList;
+import java.util.List;
+public class ListDemo {
+
+	public static void main(String[] args) {
+		manageBooks();
+	}
+private static void manageBooks() {
+	List<String> book=new ArrayList<>();
+    book.add("Book1");
+	book.add("Book2");
+	book.add("book3");
+	System.out.println(book.size());
+	book.remove(0);
+	System.out.println(book.size());
+	book.forEach((books)->System.out.println(books));	
+}
+}

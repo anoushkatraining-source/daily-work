@@ -1,0 +1,9 @@
+package basics;
+
+public class Wheels {
+	float pressure;
+	POSITION position;
+}
+enum POSITION {
+
+}

@@ -1,0 +1,43 @@
+package basics;
+
+public class demo1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//System.out.println("hello world");
+		//int age=10;
+		//boolean res=oddOrEven(age);
+		//System.out.println(res);
+		//printPattern("*");
+		int num=largestOfThree(1,2,3);
+		System.out.println(num);
+
+	}
+	
+	static boolean oddOrEven(int age) {
+		return age % 2==0;
+	}
+	static void printPattern(String string) {
+		for(int i=0;i<5;i++) {
+			for(int j=5;j>i;j--) {
+			System.out.print("*");
+		}
+			System.out.println(" ");
+		}
+	}
+	static int largestOfThree(int num1,int num2, int num3) {
+		int largest=0;
+		if(num1>num2 && num1>num3) {
+			largest=num1;
+		}
+		else if(num2>num1 && num2> num3) {
+			largest=num2;
+		}
+		else {
+			largest=num3;
+		}
+		return largest;
+		
+	}
+
+}

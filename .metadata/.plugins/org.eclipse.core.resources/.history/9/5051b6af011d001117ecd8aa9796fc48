@@ -1,0 +1,17 @@
+package basics;
+
+public class Car{
+	String model;
+	String color;
+	float price;
+	String engine;
+	
+}
+public class Car {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
