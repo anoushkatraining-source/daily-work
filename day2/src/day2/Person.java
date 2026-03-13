@@ -16,9 +16,4 @@ public void setName(String name) {
 public void adoptPet(pet Pet) {
 	System.out.println("adopted a pet");
 }
-public pet getpet() {
-	
-}
-
-
 }
