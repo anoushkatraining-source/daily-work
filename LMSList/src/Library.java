@@ -1,16 +1,30 @@
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 class Library {
 
 	static List<Book> books = new ArrayList<>();
 
 	void add(String id, String title, float price, String author) {
-		Book book = new Book(id, title, price, author);
-		books.add(book);
-	}
+	    Book book = new Book(id, title, price, author);
+	    books.add(book);
 
+	    try {
+	        FileWriter writer = new FileWriter("books.txt", true);
+	        writer.write(id + "," + title + "," + price + "," + author + "\n");
+	        writer.close();
+	    } catch(IOException e) {
+	        e.printStackTrace();
+	    }
+	   
+	}
+	
 	void reserve(String title) {
 		try {
 			for (Book b : books) {
@@ -20,11 +34,12 @@ class Library {
 					return;
 				}
 		
-			else {
-		    BookAvailability(title);
-			}
-			}
-		} 
+				else {
+			    BookAvailability(title);
+				}
+				System.out.println("Book not available");
+				}
+			} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,15 +52,18 @@ class Library {
 		}
 
 	}
-
-	List<Book> find(String title) {
+//lambda function
+	void find(String title) {
 		List<Book> books = new ArrayList<>();
-		for (Book book : books) {
-			if (book.title.toLowerCase().contains(title.toLowerCase())) {
-				books.add(book);
+		Consumer<Book> consumer= name -> {
+			if (name.title.toLowerCase().contains(title.toLowerCase())) {
+				books.add(name);
 			}
-		}
-		return books;
+			System.out.println(books);
+			
+		};
+		books.forEach(consumer);
+		
 	}
 
 	Book remove(String id) throws Exception {
@@ -59,12 +77,12 @@ class Library {
 	}
 
 	void displayBooks() {
-		System.out.println("BOOKS AVAILIABLE");
-		System.out.println("============================================");
-		for (Book b : books)
-			if (b.getStatus() == STATUS.AVAILABLE)
-				System.out.println(b + "\n\n");
-		System.out.println("============================================");
+		try {
+			readfile();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	void displayAllBooks() {
@@ -75,5 +93,13 @@ class Library {
 			System.out.println(b + "\n\n");
 		System.out.println("============================================");
 	}
+	static void readfile()throws IOException {
+        BufferedReader reader =new BufferedReader(new FileReader("books.txt"));
+		String line;
+		while((line=reader.readLine())!=null) {
+		System.out.println(line);
+		}
+		reader.close();
 
+}
 }
