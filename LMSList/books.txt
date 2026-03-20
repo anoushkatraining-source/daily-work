@@ -3,3 +3,12 @@
 34,ghjg,756.0,hfg
 567,jghl,7654.0,kgh
 34,kjhgf,7654.0,kjh
+1,Java,500.0,James
+1,Java,500.0,James
+1,Python,400.0,Guido
+1,Java,500.0,aditi
+1,Java,100.0,anoushka
+1,java,400.0,o
+1,Java,500.0,aditi
+1,Java,100.0,anoushka
+1,java,400.0,o

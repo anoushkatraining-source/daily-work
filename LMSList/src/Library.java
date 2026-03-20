@@ -12,6 +12,9 @@ class Library {
 	static List<Book> books = new ArrayList<>();
 
 	void add(String id, String title, float price, String author) {
+		if (id == null || id.trim().isEmpty()) {
+		    throw new IllegalArgumentException("Book ID cannot be null or empty");
+		}
 	    Book book = new Book(id, title, price, author);
 	    books.add(book);
 
@@ -26,6 +29,14 @@ class Library {
 	}
 	
 	void reserve(String title) {
+		if(title==null) {
+			throw new IllegalArgumentException("title cannot be null");
+		}
+		if(title=="  ") {
+			throw new IllegalArgumentException("title cannot have spaces");
+		}
+		
+		
 		try {
 			for (Book b : books) {
 				if (b.title.equals(title) && b.getStatus() == STATUS.AVAILABLE) {

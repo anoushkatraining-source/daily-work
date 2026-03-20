@@ -6,11 +6,19 @@ class Book {
 	String author;
 
 	public Book(String id, String title, float price, String author) {
+		if (ValidateUtils.ValidateStrings(author) || ValidateUtils.ValidateStrings(title)
+				|| ValidateUtils.ValidateStrings(id)) {
+			throw new IllegalArgumentException("Invalid input");
+		}
 		this.id = id;
 		this.title = title;
 		this.price = price;
 		this.author = author;
 		this.status = STATUS.AVAILABLE;
+	}
+
+	public Book(String string, STATUS available) {
+		// TODO Auto-generated constructor stub
 	}
 
 	private STATUS status;
@@ -52,5 +60,10 @@ class Book {
 				Price: %.2f
 				Status: %s""".formatted(id, title, author, price, status);
 		return result;
+	}
+
+	public void setId(Object object) {
+		// TODO Auto-generated method stub
+
 	}
 }
