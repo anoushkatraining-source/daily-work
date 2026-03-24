@@ -12,7 +12,7 @@ public static void main(String[] args) throws IOException {
 			String[] part=line.split(";");
 			if(part.length>1) {
 				String logLevel=part[0].trim();
-				map.put(logLevel, map.getOrDefault(logLevel, 0) + 1);  
+				map.put(logLevel, map.get(logLevel) + 1);  
 				bufferedReader.close();
 			}
 		}
