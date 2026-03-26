@@ -1,0 +1,21 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background-color: blueviolet;
+    
+}
+
+
+ul {
+    list-style: none;
+    background-color:aquamarine;
+}
+
+li {
+    margin: 10px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}

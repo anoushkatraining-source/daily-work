@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class SystemLogger {
+public class systemLogger {
 	public static void main(String[] args) throws IOException {
 		Map<String, Integer> map = new HashMap<>();
 		String path = "system.log";
