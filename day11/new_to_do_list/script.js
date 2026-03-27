@@ -1,5 +1,5 @@
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
-
+const errorDiv=document.getElementById('error');
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
@@ -23,7 +23,9 @@ function addTodo() {
     saveTodos();
     renderTodos();
 }
-
+function validate(){
+    errorDiv.style.display=(event.target.value.trim()!=='')? 'none':'inline';
+}
 function deleteTodo(index) {
     todos.splice(index, 1);
     saveTodos();

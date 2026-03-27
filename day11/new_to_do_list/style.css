@@ -7,7 +7,9 @@ body, html {
     font-family:sans-serif;
     background-color:pink;
 }
-
+.error{
+    color:red;
+}
 .todo-container {
     text-align: center;
     padding: 20px;
