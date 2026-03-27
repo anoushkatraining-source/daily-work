@@ -10,8 +10,8 @@ function addTodo() {
     const urgentRadio = document.querySelector('input[name="urgency"]:checked');
     
     const text = input.value.trim();
-    const time = timeInput.value;  // Get the time input (HH:MM)
-    const isUrgent = urgentRadio.value === 'urgent';  // Check if the task is marked as urgent
+    const time = timeInput.value; 
+    const isUrgent = urgentRadio.value === 'urgent';  
     
     if (text === '') return;
     
