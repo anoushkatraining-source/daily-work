@@ -38,7 +38,7 @@ function toggleComplete(index) {
 
 function renderTodos() {
     const list = document.getElementById("todo-list");
-    list.innerHTML = '';  // Clear existing list
+    list.innerHTML = ''; 
     
     todos.forEach((todo, index) => {
         const li = document.createElement('li');
@@ -63,3 +63,12 @@ function renderTodos() {
 }
 
 renderTodos();
+
+function sortByName(){
+    todos.sort((a,b)=>{
+return a.text.localeCompare(b.text);
+    });
+    console.log(todos);
+    renderTodos();
+}
+sortByName(todos);
