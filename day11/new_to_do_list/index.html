@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" hred="styles.css">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Todo App</h2>
-    <input type="text"id="todo-input" placeholder="Enter Task">
-    <button onclick="addTodo()">Add</button>
-    <ul id="todo-list"></ul>
-<script src="script.js"></script>
+    <div class="todo-container">
+        <h2>Todo List</h2>
+        <div class="todo-input-wrapper">
+            <input type="text" id="todo-input" placeholder="Enter a new task">
+            <input type="time" id="todo-time">
+        </div>
+        <div class="urgent-wrapper">
+            <label>
+                <input type="radio" name="urgency" value="urgent" id="urgent" /> Urgent
+            </label>
+            <label>
+                <input type="radio" name="urgency" value="not-urgent" id="not-urgent" checked /> Not Urgent
+            </label>
+        </div>
+        <button onclick="addTodo()">Add Todo</button>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
