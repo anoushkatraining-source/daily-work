@@ -1,5 +1,6 @@
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
-const errorDiv=document.getElementById('error');
+const errorDiv = document.getElementById('error');
+
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
@@ -7,15 +8,15 @@ function saveTodos() {
 function addTodo() {
     const input = document.getElementById('todo-input');
     const timeInput = document.getElementById('todo-time');
-    const urgentRadio = document.querySelector('input[name="urgency"]:checked');
-    
+    const urgencySelect = document.getElementById('severity');
+
     const text = input.value.trim();
     const time = timeInput.value; 
-    const isUrgent = urgentRadio.value === 'urgent';  
+    const urgency = urgencySelect.value;
     
     if (text === '') return;
     
-    todos.push({ text, time, completed: false, urgent: isUrgent });
+    todos.push({ text, time, completed: false, urgency: urgency });
     
     input.value = '';
     timeInput.value = '';
@@ -23,9 +24,11 @@ function addTodo() {
     saveTodos();
     renderTodos();
 }
+
 function validate(){
-    errorDiv.style.display=(event.target.value.trim()!=='')? 'none':'inline';
+    errorDiv.style.display = (event.target.value.trim() !== '') ? 'none' : 'inline';
 }
+
 function deleteTodo(index) {
     todos.splice(index, 1);
     saveTodos();
@@ -46,7 +49,7 @@ function renderTodos() {
         const li = document.createElement('li');
         if (todo.completed) li.classList.add('completed');
         
-        const urgencyText = todo.urgent ? '<span class="urgent-label">URGENT</span>' : '<span class="not-urgent-label">Not Urgent</span>';
+        const urgencyText = `<span class="urgency-label">${todo.urgency}</span>`;
         
         li.innerHTML = `
             <div class="todo-details">
@@ -68,9 +71,10 @@ renderTodos();
 
 function sortByName(){
     todos.sort((a,b)=>{
-return a.text.localeCompare(b.text);
+        return a.text.localeCompare(b.text);
     });
     console.log(todos);
     renderTodos();
 }
-sortByName(todos);
+
+sortByName();

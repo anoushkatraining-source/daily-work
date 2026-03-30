@@ -128,15 +128,15 @@ button.delete-btn:hover {
     margin-left: 15px;
 }
 
-.urgent-label {
+/* .urgent-label {
     font-weight: bold;
     color: #F44336;
-}
+} */
 
-.not-urgent-label {
+/* .not-urgent-label {
     font-style: italic;
     color: #4CAF50;
-}
+} */
 
 .todo-details {
     display: flex;
@@ -147,4 +147,42 @@ button.delete-btn:hover {
 
 .todo-details span {
     margin-right: 15px;
+}
+/* #severity {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    background-color: #f9f9f9;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+} */
+
+#severity {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: white;
+}
+
+#severity.high {
+    border-color: red;
+    background-color: #ffe5e5;
+    color: red;
+}
+
+#severity.medium {
+    border-color: orange;
+    background-color: #fff4e5;
+    color: orange;
+}
+
+#severity.low {
+    border-color: green;
+    background-color: #e5ffe5;
+    color: green;
 }
