@@ -10,6 +10,13 @@ function App(){
     newNote.id = Date.now();
     setNotes([...notes,newNote]);
   };
+  const sendPostRequest=()=>{
+    axios.post("http://localhost:3000/notes",note,{
+      headers:{
+              "content-Type":"application/json",
+      },
+    });
+  }
 
   const deleteNote=(id)=>{
     setNotes(notes.filter((note)=>note.id!==id));
