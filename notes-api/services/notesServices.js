@@ -11,4 +11,7 @@ async function getNoteById(id) {
 async function saveNotes(notes) {
     await fs.writeFile('./data/notes.json', JSON.stringify(notes, null, 2));
 }
-module.exports={getNotes,saveNotes,getNoteById};
+async function updateNote(notes){
+    await fs.writeFile('./data/notes.json', JSON.stringify(notes, null, 2));
+}
+module.exports= {getNotes,saveNotes, updateNote};
