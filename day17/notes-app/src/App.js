@@ -1,31 +1,35 @@
-import {useState} from "react";
+import { useState } from "react";
 import NoteForm from "./components/NoteForm";
 import NoteList from "./components/NoteList";
-function App(){
-  const [notes,setNotes]=useState([]);
-  //const addNote=(text)=>{
-    //const newNote={id: Date.now(),text};
-    const addNote = (note) => {
-    const newNote = { ...note };
-    newNote.id = Date.now();
-    setNotes([...notes,newNote]);
+import axios from "axios";
+function App() {
+  const [notes, setNotes] = useState([]);
+  const addNote = (note) => {
+    const newNote = {
+      id: Date.now(),
+      title: note.title,
+      content: note.content
+    };
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+    sendPostRequest(newNote);
   };
-  const sendPostRequest=()=>{
-    axios.post("http://localhost:3000/notes",note,{
-      headers:{
-              "content-Type":"application/json",
-      },
-    });
-  }
-
-  const deleteNote=(id)=>{
-    setNotes(notes.filter((note)=>note.id!==id));
+  const sendPostRequest = async (newNote) => {
+    try {
+      await axios.post("http://localhost:3001/notes", newNote);
+    } catch (error) {
+      console.error(error);
+    }
   };
-  return(
+  const deleteNote = (id) => {
+    setNotes((prevNotes) =>
+      prevNotes.filter((note) => note.id !== id)
+    );
+  };
+  return (
     <div>
       <h1>Notes App</h1>
-      <NoteForm addNote={addNote}/>
-      <NoteList notes={notes} deleteNote={deleteNote}/> 
+      <NoteForm addNote={addNote} />
+      <NoteList notes={notes} deleteNote={deleteNote} />
     </div>
   );
 }

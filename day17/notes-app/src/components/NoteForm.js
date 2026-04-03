@@ -2,7 +2,7 @@ import { useState } from "react";
 function NoteForm({ addNote }) {
     const [note, setNote] = useState({
         title: "",
-        status: "open"
+        content: "open"
     });
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -10,7 +10,7 @@ function NoteForm({ addNote }) {
         addNote(note);
         setNote({
             title: "",
-            status: "open"
+            content: "open"
         });
     };
     return (
@@ -26,15 +26,15 @@ function NoteForm({ addNote }) {
                 <label>
                     <input
                         type="checkbox"
-                        checked={note.status === "closed"}
+                        checked={note.content === "closed"}
                         onChange={(event) =>
                             setNote({
                                 ...note,
-                                status: event.target.checked ? "closed" : "open"
+                                content: event.target.checked ? "closed" : "open"
                             })
                         }
                     />
-                    Status
+                    content
                 </label>
             </div>
             <button>Add</button>
