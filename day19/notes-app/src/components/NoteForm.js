@@ -16,7 +16,7 @@ function NoteForm({ addNote }) {
     });
   };
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Enter note"
@@ -32,7 +32,7 @@ function NoteForm({ addNote }) {
           setNote({ ...note, time: e.target.value })
         }
       />
-      <label className="checkbox">
+      <label>
         <input
           type="checkbox"
           checked={note.status === "closed"}
@@ -40,12 +40,11 @@ function NoteForm({ addNote }) {
             setNote({
               ...note,
               status: e.target.checked ? "closed" : "open"
-            })
-          }
+            })}
         />
         Status
       </label>
-      <button type="submit">Add</button>
+      <button>Add</button>
     </form>
   );
 }

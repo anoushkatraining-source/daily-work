@@ -1,35 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
 import NoteForm from "./components/NoteForm";
 import NoteList from "./components/NoteList";
 import axios from "axios";
+import "./App.css";
 function App() {
   const [notes, setNotes] = useState([]);
-  const addNote = (note) => {
-    const newNote = {
-      id: Date.now(),
-      title: note.title,
-      content: note.content
-    };
-    setNotes((prevNotes) => [...prevNotes, newNote]);
-    sendPostRequest(newNote);
+  const [view, setView] = useState("add");
+  const fetchNotes = async () => {
+    try {
+      const res = await axios.get("http://localhost:3001/notes");
+      setNotes(res.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
-  const sendPostRequest = async (newNote) => {
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+  const addNote = async (note) => {
+    const newNote = { ...note, id: Date.now() };
+    setNotes((prev) => [...prev, newNote]);
+    //setView("list");
     try {
       await axios.post("http://localhost:3001/notes", newNote);
     } catch (error) {
       console.error(error);
     }
   };
-  const deleteNote = (id) => {
-    setNotes((prevNotes) =>
-      prevNotes.filter((note) => note.id !== id)
-    );
+  const deleteNote = async (id) => {
+    setNotes((prev) => prev.filter((note) => note.id !== id));
+    try {
+      await axios.delete(`http://localhost:3001/notes/${id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
-    <div>
-      <h1>Notes App</h1>
-      <NoteForm addNote={addNote} />
-      <NoteList notes={notes} deleteNote={deleteNote} />
+    <div className="app">
+      <Navbar setView={setView} />
+      <h1 className="title">Notes App</h1>
+      {view === "add" && <NoteForm addNote={addNote} />}
+      {view === "list" && (
+        <NoteList notes={notes} deleteNote={deleteNote} />
+      )}
     </div>
   );
 }
