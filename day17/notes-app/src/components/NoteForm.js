@@ -2,6 +2,7 @@ import { useState } from "react";
 function NoteForm({ addNote }) {
   const [note, setNote] = useState({
     title: "",
+    content:"",
     status: "open",
     time: ""
   });
@@ -11,6 +12,7 @@ function NoteForm({ addNote }) {
     addNote(note);
     setNote({
       title: "",
+      content:"",
       status: "open",
       time: ""
     });
@@ -25,6 +27,15 @@ function NoteForm({ addNote }) {
           setNote({ ...note, title: e.target.value })
         }
       />
+        <input
+        type="text"
+        placeholder="Enter description"
+        value={note.content}
+        onChange={(e) =>
+          setNote({ ...note, content: e.target.value })
+        }
+      />
+
       <input
         type="time"
         value={note.time}

@@ -16,11 +16,12 @@ exports.createNote = async (request, response) => {
     if (!request.body) {
         return response.status(400).json({ error: 'Request body required' });
     }
-    const { title,time, status } = request.body;
+    const { title,content,time, status } = request.body;
     if (
         !request.body ||
         typeof request.body !=='object'||
         typeof title !=='string'||
+        typeof content !=='string'||
         typeof status !=='string'||
         !title.trim()||
         !status.trim()
@@ -31,6 +32,7 @@ exports.createNote = async (request, response) => {
     const newNote = {
         id: Date.now(),
         title,
+        content,
         time,
         status:status
     };
