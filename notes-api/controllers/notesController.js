@@ -1,61 +1,55 @@
-const service = require('../services/notesServices');
 const { getNotes, saveNotes } = require('../services/notesServices');
-exports.getAllNotes = async (request, response) => {
-    const notes = await service.getNotes();
-    response.json(notes);
+exports.getAllNotes = async (req, res) => {
+    const notes = await getNotes();
+    res.json(notes);
 };
-exports.getNoteById = async (request, response) => {
-    const notes = await service.getNotes();
-    const note = notes.find(note => note.id == request.params.id);
+exports.getNoteById = async (req, res) => {
+    const id = Number(req.params.id);
+    const notes = await getNotes();
+    const note = notes.find(n => n.id === id);
     if (!note) {
-        return response.status(404).json({ error: "Not found" });
+        return res.status(404).json({ error: "Not found" });
     }
-    response.json(note);
+    res.json(note);
 };
-exports.createNote = async (request, response) => {
-    if (!request.body) {
-        return response.status(400).json({ error: 'Request body required' });
-    }
-    const { title,content,time, status } = request.body;
+exports.createNote = async (req, res) => {
+    const { title, content, startDate, endDate, priority } = req.body;
     if (
-        !request.body ||
-        typeof request.body !=='object'||
-        typeof title !=='string'||
-        typeof content !=='string'||
-        typeof status !=='string'||
-        !title.trim()||
-        !status.trim()
+        typeof title !== "string" || !title.trim() ||
+        typeof content !== "string" || !content.trim()
     ) {
-        return response.status(400).json({ error: 'Invalid input' });
+        return res.status(400).json({ error: "Invalid input" });
     }
     const notes = await getNotes();
     const newNote = {
         id: Date.now(),
         title,
         content,
-        time,
-        status:status
+        startDate,
+        endDate,
+        priority
     };
     notes.push(newNote);
     await saveNotes(notes);
-    response.status(201).json(newNote);
+    res.status(201).json(newNote);
 };
 exports.updateNote = async (req, res) => {
+    const id = Number(req.params.id);
     const notes = await getNotes();
     const updatedNotes = notes.map(note =>
-        note.id == req.params.id ? { ...note, ...req.body } : note);
+        note.id === id ? { ...note, ...req.body } : note
+    );
     await saveNotes(updatedNotes);
     res.json({ message: "Updated" });
 };
-exports.deleteNote = async (request, response) => {
-    const id=Number(request.params.id);
+exports.deleteNote = async (req, res) => {
+    const id = Number(req.params.id);
     const notes = await getNotes();
-    const note = notes.find(note => note.id ==id);
-    if (!note) {
-        return response.status(404).json({ error: 'Not found' });
+    const noteExists = notes.find(note => note.id === id);
+    if (!noteExists) {
+        return res.status(404).json({ error: "Not found" });
     }
-    const filtered = notes.filter(note => note.id != request.params.id);
-    await saveNotes(filtered);
-    response.json({ message: 'Deleted' });
+    const filteredNotes = notes.filter(note => note.id !== id);
+    await saveNotes(filteredNotes);
+    res.json({ message: "Deleted" });
 };
-

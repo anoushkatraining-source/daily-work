@@ -1,10 +1,17 @@
-function Navbar({ setView }) {
+import {Link} from "react-router-dom";
+function Navbar() {
   return (
-    <nav className="navbar">
-      <button onClick={() => setView("add")}>Add Note</button>
-      <button onClick={() => setView("list")}>Note List</button>
-    </nav>
+    <div className="navbar">
+      <h2 className="logo">Notes App</h2>
+      <div className="nav-links">
+        <Link to="/add">
+          <button>Add Note</button>
+        </Link>
+        <Link to="/list">
+          <button>Note List</button>
+        </Link>
+      </div>
+    </div>
   );
 }
-
 export default Navbar;
