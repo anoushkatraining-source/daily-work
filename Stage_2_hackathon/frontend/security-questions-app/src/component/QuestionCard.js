@@ -1,8 +1,6 @@
 import React from 'react';
-
 const QuestionCard = ({ index, qa, questions, hideAnswers, onChange }) => {
   const isMismatch = qa.confirmAnswer && qa.answer !== qa.confirmAnswer;
-
   return (
     <div className="card-item" style={{ marginBottom: '20px', borderBottom: '1px solid #ccc' }}>
       <label>Question {index + 1}</label>
@@ -11,7 +9,7 @@ const QuestionCard = ({ index, qa, questions, hideAnswers, onChange }) => {
         onChange={(e) => onChange(index, 'question', e.target.value)}
         style={{ display: 'block', width: '100%', margin: '10px 0' }}
       >
-        <option value="">-- Choose --</option>
+        <option value="">Choose</option>
         {questions && questions.length > 0 ? (
           questions.map((q) => (
             <option key={q.q_id || q.question} value={q.question}>
@@ -22,7 +20,6 @@ const QuestionCard = ({ index, qa, questions, hideAnswers, onChange }) => {
           <option disabled>No questions found</option>
         )}
       </select>
-
       <div style={{ display: 'flex', gap: '10px' }}>
         <input
           type={hideAnswers ? "password" : "text"}
@@ -41,5 +38,4 @@ const QuestionCard = ({ index, qa, questions, hideAnswers, onChange }) => {
     </div>
   );
 };
-
 export default QuestionCard;

@@ -7,5 +7,4 @@ app.use(cors());
 app.use(express.json());
 app.use("/questions", questionRoutes);
 app.use("/responses", responseRoutes);
-
 module.exports = app;

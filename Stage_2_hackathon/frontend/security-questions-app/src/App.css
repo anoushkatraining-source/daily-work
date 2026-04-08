@@ -1,4 +1,3 @@
-/* Container for the whole page */
 .app-container {
   max-width: 700px;
   margin: 40px auto;
@@ -15,14 +14,12 @@
   margin-bottom: 30px;
 }
 
-/* Form Layout */
 .form-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Individual Question Card Styling */
 .question-block {
   padding: 15px;
   border: 1px solid #e0e0e0;
@@ -43,7 +40,7 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Ensures padding doesn't break width */
+  box-sizing: border-box; 
 }
 
 .input-row {
@@ -62,13 +59,9 @@
   margin-top: -5px;
   display: block;
 }
-
-/* --- BOTTOM CONTROLS (THE FIX) --- */
-
-/* This container ensures the checkbox stays left above the button */
 .hide-toggle-container {
   display: flex;
-  justify-content: flex-start; /* Aligns to the left */
+  justify-content: flex-start;
   align-items: center;
   margin: 15px 0;
   padding-left: 5px;
@@ -90,7 +83,6 @@
   cursor: pointer;
 }
 
-/* Submit Button */
 .submit-btn {
   width: 100%;
   padding: 14px;

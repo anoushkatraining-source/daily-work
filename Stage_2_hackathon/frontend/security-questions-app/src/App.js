@@ -29,29 +29,22 @@ function App() {
       .map(item => item.question);
     return questions.filter(q => !used.includes(q.question));
   };
-
   const handleSubmit = async () => {
     const isComplete = qaList.every(q => q.question && q.answer && q.confirmAnswer);
     const isMatched = qaList.every(q => q.answer === q.confirmAnswer);
-
     if (!isComplete) return alert("Please fill all 5 sections.");
     if (!isMatched) return alert("Answers do not match.");
-
     try {
       await axios.post("http://localhost:3001/responses", { responses: qaList });
       alert("Submitted Successfully!");
-      
-      // THIS CLEARS THE TEXT FIELDS
       setQaList(createEmptyForm());
-      
     } catch (err) {
       alert("Error saving data.");
     }
   };
-
   return (
     <div className="app-container">
-      <h1 className="app-title">Security Setup</h1>
+      <h1 className="app-title">Security Form</h1>
       
       <div className="form-wrapper">
         {qaList.map((qa, i) => (
@@ -75,7 +68,7 @@ function App() {
           </label>
         </div>
         <button className="submit-btn" onClick={handleSubmit}>
-          Submit All
+          Submit
         </button>
       </div>
     </div>
