@@ -1,7 +1,10 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
-test('renders learn react link', () => {
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import App from "./App";
+import axios from "axios";
+jest.mock("axios");
+test("renders Security Form title", () => {
+  axios.get.mockResolvedValue({ data: [] });
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByText("Security Form")).toBeInTheDocument();
 });

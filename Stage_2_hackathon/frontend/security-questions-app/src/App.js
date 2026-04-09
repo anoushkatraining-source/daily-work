@@ -5,7 +5,8 @@ import "./App.css";
 function App() {
   const [questions, setQuestions] = useState([]);
   const [hideAnswers, setHideAnswers] = useState(false);
-    const createEmptyForm = () => [
+  const [errors, setErrors] = useState([]);
+  const createEmptyForm = () => [
     { question: "", answer: "", confirmAnswer: "" },
     { question: "", answer: "", confirmAnswer: "" },
     { question: "", answer: "", confirmAnswer: "" },
@@ -20,8 +21,26 @@ function App() {
   }, []);
   const handleUpdate = (index, field, value) => {
     const updated = [...qaList];
+    const currentQuestion = updated[index].question;
+    if (field === "answer" || field === "confirmAnswer") {
+      if (currentQuestion.toLowerCase().includes("age")) {
+        if (!/^\d*$/.test(value)) return;
+      }
+    }
     updated[index][field] = value;
     setQaList(updated);
+    const newErrors = [...errors];
+    const q = updated[index];
+    if (!q.question || q.answer.trim() === "" || q.confirmAnswer.trim() === "") {
+      newErrors[index] = "Required";
+    } else if (q.question.toLowerCase().includes("age") && !/^\d+$/.test(q.answer.trim())) {
+      newErrors[index] = "Only numbers allowed";
+    } else if (q.answer.trim() !== q.confirmAnswer.trim()) {
+      newErrors[index] = "Mismatch";
+    } else {
+      newErrors[index] = "";
+    }
+    setErrors(newErrors);
   };
   const getAvailableQuestions = (currentIndex) => {
     const used = qaList
@@ -29,23 +48,55 @@ function App() {
       .map(item => item.question);
     return questions.filter(q => !used.includes(q.question));
   };
+  const validateForm = () => {
+    let valid = true;
+    let newErrors = [];
+    qaList.forEach((q, i) => {
+      if (!q.question || q.answer.trim() === "" || q.confirmAnswer.trim() === "") {
+        newErrors[i] = "Required";
+        valid = false;
+      } else if (q.question.toLowerCase().includes("age") && !/^\d+$/.test(q.answer.trim())) {
+        newErrors[i] = "Only numbers allowed";
+        valid = false;
+      } else if (q.answer.trim() !== q.confirmAnswer.trim()) {
+        newErrors[i] = "Mismatch";
+        valid = false;
+      } else {
+        newErrors[i] = "";
+      }
+    });
+    setErrors(newErrors);
+    return valid;
+  };
+  const isFormValid = () => {
+    return qaList.every(q =>
+      q.question &&
+      q.answer.trim()!== "" &&
+      q.confirmAnswer.trim() !== "" &&
+      (!q.question.toLowerCase().includes("age")||/^\d+$/.test(q.answer.trim())) &&
+      q.answer.trim()===q.confirmAnswer.trim()
+    );
+  };
   const handleSubmit = async () => {
-    const isComplete = qaList.every(q => q.question && q.answer && q.confirmAnswer);
-    const isMatched = qaList.every(q => q.answer === q.confirmAnswer);
-    if (!isComplete) return alert("Please fill all 5 sections.");
-    if (!isMatched) return alert("Answers do not match.");
+    if (!validateForm()) return;
     try {
-      await axios.post("http://localhost:3001/responses", { responses: qaList });
-      alert("Submitted Successfully!");
+      await axios.post("http://localhost:3001/responses", {
+        responses: qaList.map(q => ({
+          question: q.question,
+          answer: q.answer
+        }))
+      });
+alert("Submitted Successfully!");
       setQaList(createEmptyForm());
+      setErrors([]);
     } catch (err) {
-      alert("Error saving data.");
+      console.log(err.response?.data);
+      alert(err.response?.data?.error || "Error saving data.");
     }
   };
   return (
     <div className="app-container">
       <h1 className="app-title">Security Form</h1>
-      
       <div className="form-wrapper">
         {qaList.map((qa, i) => (
           <QuestionCard
@@ -53,21 +104,25 @@ function App() {
             index={i}
             qa={qa}
             questions={getAvailableQuestions(i)}
-            hideAnswers={hideAnswers} 
+            hideAnswers={hideAnswers}
             onChange={handleUpdate}
+            error={errors[i]}
           />
         ))}
         <div className="bottom-controls">
           <label className="checkbox-label">
-            <input 
-              type="checkbox" 
-              checked={hideAnswers} 
-              onChange={() => setHideAnswers(!hideAnswers)} 
+            <input
+              type="checkbox"
+              checked={hideAnswers}
+              onChange={() => setHideAnswers(!hideAnswers)}
             />
             Hide Answers
           </label>
         </div>
-        <button className="submit-btn" onClick={handleSubmit}>
+        <button
+          className="submit-btn"
+          onClick={handleSubmit}
+          disabled={!isFormValid()}>
           Submit
         </button>
       </div>

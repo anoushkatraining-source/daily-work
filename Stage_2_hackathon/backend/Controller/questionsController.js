@@ -1,8 +1,11 @@
 const questionService = require("../services/question_service");
 exports.getQuestions = (req, res) => {
-const data = questionService.readFile("../data/questions.json");
+  const data = questionService.readFile();
+  if (!Array.isArray(data)) {
+    return res.status(500).json({ error: "Invalid data format" });
+  }
   if (data.length === 0) {
     return res.status(404).json({ error: "Questions not found or JSON invalid" });
   }
-  res.json(data);
+  return res.status(200).json(data);
 };

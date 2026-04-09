@@ -1,40 +1,34 @@
 import React from 'react';
-const QuestionCard = ({ index, qa, questions, hideAnswers, onChange }) => {
-  const isMismatch = qa.confirmAnswer && qa.answer !== qa.confirmAnswer;
+const QuestionCard = ({ index, qa, questions, hideAnswers, onChange, error }) => {
   return (
-    <div className="card-item" style={{ marginBottom: '20px', borderBottom: '1px solid #ccc' }}>
-      <label>Question {index + 1}</label>
+    <div className="question-block">
+      <label className="question-label">Question {index + 1}</label>
       <select
+        className="form-select"
         value={qa.question}
-        onChange={(e) => onChange(index, 'question', e.target.value)}
-        style={{ display: 'block', width: '100%', margin: '10px 0' }}
-      >
+        onChange={(e) => onChange(index, 'question', e.target.value)}>
         <option value="">Choose</option>
-        {questions && questions.length > 0 ? (
-          questions.map((q) => (
-            <option key={q.q_id || q.question} value={q.question}>
-              {q.question}
-            </option>
-          ))
-        ) : (
-          <option disabled>No questions found</option>
-        )}
+        {questions.map((q) => (
+          <option key={q.q_id || q.question} value={q.question}>
+            {q.question}
+          </option>
+        ))}
       </select>
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <div className="input-row">
         <input
+          className={`form-input ${error ? "input-error" : ""}`}
           type={hideAnswers ? "password" : "text"}
           placeholder="Answer"
           value={qa.answer}
-          onChange={(e) => onChange(index, 'answer', e.target.value)}
-        />
+          onChange={(e) => onChange(index, 'answer', e.target.value)}/>
         <input
+          className={`form-input ${error ? "input-error" : ""}`}
           type={hideAnswers ? "password" : "text"}
           placeholder="Confirm"
           value={qa.confirmAnswer}
-          onChange={(e) => onChange(index, 'confirmAnswer', e.target.value)}
-        />
+          onChange={(e) => onChange(index, 'confirmAnswer', e.target.value)}/>
       </div>
-      {isMismatch && <span style={{ color: 'red' }}>Mismatch</span>}
+      {error && <span className="error-text">{error}</span>}
     </div>
   );
 };
