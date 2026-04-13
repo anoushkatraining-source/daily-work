@@ -1,2 +1,208 @@
+node_modules/
 
-/.metadata/
+.metadata/
+
+bin/
+
+tmp/
+
+*.tmp
+
+*.bak
+
+*.swp
+
+*~.nib
+
+local.properties
+
+.settings/
+
+.loadpath
+
+.recommenders
+
+*.class
+
+coverage/
+
+# External tool builders
+
+.externalToolBuilders/
+ 
+# Locally stored "Eclipse launch configurations"
+
+*.launch
+ 
+# PyDev specific (Python IDE for Eclipse)
+
+*.pydevproject
+ 
+# CDT-specific (C/C++ Development Tooling)
+
+.cproject
+ 
+# CDT- autotools
+
+.autotools
+ 
+# Java annotation processor (APT)
+
+.factorypath
+ 
+# PDT-specific (PHP Development Tools)
+
+.buildpath
+ 
+# sbteclipse plugin
+
+.target
+ 
+# Tern plugin
+
+.tern-project
+ 
+# TeXlipse plugin
+
+.texlipse
+ 
+# STS (Spring Tool Suite)
+
+.springBeans
+ 
+# Code Recommenders
+
+.recommenders/
+ 
+# Annotation Processing
+
+.apt_generated/
+
+.apt_generated_tests/
+ 
+# Scala IDE specific (Scala & Java development for Eclipse)
+
+.cache-main
+
+.scala_dependencies
+
+.worksheet
+ 
+# Uncomment this line if you wish to ignore the project description file.
+
+# Typically, this file would be tracked if it contains build/dependency configurations:
+
+.project
+ 
+ 
+node_modules/
+
+**/.project
+
+.metadata/
+
+*.class
+
+.vscode/
+ 
+ 
+# Miscellaneous
+
+*.java.hsp
+
+*.sonarj
+
+*.sw*
+
+.DS_Store
+
+build.sh
+
+integration-repo
+
+ivy-cache
+
+argfile*
+
+activemq-data/
+
+classes/
+
+.cursor/
+ 
+ 
+# Log files
+
+jxl.log
+
+jmx.log
+
+derby.log
+ 
+ 
+# Gradle artifacts
+
+.gradle
+
+.gradletasknamecache
+
+/build
+
+buildSrc/build
+
+/spring-*/build
+
+/framework-*/build
+
+/integration-tests/build
+
+/src/asciidoc/build
+
+spring-test/test-output/
+ 
+ 
+# Maven artifacts
+
+/target/
+ 
+ 
+# Eclipse artifacts, including WTP generated manifests
+
+bin
+
+.classpath
+
+.project
+
+.settings
+
+.springBeans
+
+spring-*/src/main/java/META-INF/MANIFEST.MF
+ 
+ 
+# IntelliJ IDEA artifacts and output dirs
+
+*.iml
+
+*.ipr
+
+*.iws
+
+.idea/*
+
+!.idea/icon.svg
+
+out
+
+test-output
+
+atlassian-ide-plugin.xml
+ 
+ 
+cached-antora-playbook.yml
+ 
+ 
+/.kotlin/
+ 
+ 
