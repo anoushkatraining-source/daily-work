@@ -13,7 +13,7 @@ function App() {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/notes");
+      const res = await axios.get("http://localhost:8080/notes");
       setNotes(res.data);
     } catch (error) {
       console.error(error);
@@ -21,7 +21,7 @@ function App() {
   };
   const addNote = async (note) => {
     try {
-      const res = await axios.post("http://localhost:3001/notes", note);
+      const res = await axios.post("http://localhost:8080/notes", note);
       setNotes((prev) => [...prev, res.data]);
     } catch (error) {
       console.error(error);
@@ -34,7 +34,7 @@ function App() {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:3001/notes/${id}`);
+      await axios.delete(`http://localhost:8080/notes/${id}`);
       setNotes((prev) => prev.filter((n) => n.id !== id));
     } catch (error) {
       console.error(error);
