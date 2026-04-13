@@ -19,7 +19,7 @@ public class NotesController {
 	NotesService notesService;
 
 	@GetMapping
-	Note getnotes() {
+	Iterable<Note> getnotes() {
 		return notesService.getNotes();
 	}
 
