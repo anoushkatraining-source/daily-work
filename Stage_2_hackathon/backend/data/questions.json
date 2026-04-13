@@ -1,0 +1,7 @@
+[
+  { "q_id": 10, "question": "What is your name?" },
+  { "q_id":20, "question": "What is your father's name?" },
+  { "q_id": 30, "question": "What is your mother's name?" },
+  { "q_id": 40, "question": "What is your age?" },
+  { "q_id": 50, "question": "What is your address?" }
+]
