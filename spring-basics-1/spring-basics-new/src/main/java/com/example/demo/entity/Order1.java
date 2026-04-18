@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Order1 {
@@ -23,6 +24,7 @@ public class Order1 {
 	private Date created_at;
 	private String Status;
 	@Valid
+	@NotEmpty(message = "Order must have at least one order line")
 	@OneToMany(mappedBy = "order1", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<OrderLine> orderLines = new ArrayList<>();

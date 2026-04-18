@@ -23,6 +23,8 @@ public class OrderLine {
 
 	@Min(1)
 	private float price;
+	@Min(1)
+	private int quantity;
 
 	@ManyToOne
 	@JoinColumn(name = "order_fk")
@@ -55,6 +57,14 @@ public class OrderLine {
 
 	public Order1 getOrder1() {
 		return order1;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public void setOrder1(Order1 order1) {
