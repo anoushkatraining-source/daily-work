@@ -33,6 +33,7 @@ import com.example.demo.security.jwt.JwtUtils;
 import com.example.demo.service.UserDetailsImplementation;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/auth")
 public class AuthController {
 
