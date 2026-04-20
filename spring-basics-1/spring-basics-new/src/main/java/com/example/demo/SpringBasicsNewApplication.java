@@ -7,9 +7,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication
 public class SpringBasicsNewApplication {
 	public static void main(String[] args) {
-//		ConfigurableApplicationContext context1 = SpringApplication.run(SpringBasicsApplication.class, args);
-//		NoteService service = context1.getBean(NoteService.class);
-//		System.out.println(service);
 		SpringApplication.run(SpringBasicsNewApplication.class, args);
 	}
 }
